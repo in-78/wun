@@ -1,10 +1,13 @@
 class ListsController < ApplicationController
   def index
-    @lists = List.all
+    @lists = current_user.lists.all
   end
 
   def show
+    @lists = current_user.lists.all
+
     @list = List.find(params[:id])
+    @items = @list.items.all
   end
 
   def new
@@ -12,14 +15,19 @@ class ListsController < ApplicationController
   end
 
   def edit
+    @lists = current_user.lists.all
+
     @list = List.find(params[:id])
+    @items = @list.items.all
   end
 
   def create
     @list = current_user.lists.new(params[:list])
+    @list.title = params[:title]
 
     if @list.save
-      redirect_to lists_url(@list, only_path: true), notice: 'Game was successfully created.'
+      # redirect_to lists_url(@list, only_path: true), notice: 'Game was successfully created.'
+      redirect_to @list, notice: 'Game was successfully created.'
     else
       render :new
     end

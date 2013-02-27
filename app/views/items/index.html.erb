@@ -1,33 +1,41 @@
 <h1>Listing items</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Date due</th>
-    <th>Date remind</th>
-    <th>Complete</th>
-    <th>Star</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<div class="container">
+  <div class="row">
+    <div class="span4">
+    </div>
+    <div class="span8">
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Date due</th>
+            <th>Date remind</th>
+            <th>Complete</th>
+            <th>Star</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
 
-<% @items.each do |item| %>
-  <tr>
-    <td><%= item.name %></td>
-    <td><%= item.description %></td>
-    <td><%= item.date_due %></td>
-    <td><%= item.date_remind %></td>
-    <td><%= item.complete %></td>
-    <td><%= item.star %></td>
-    <td><%= link_to 'Show', item %></td>
-    <td><%= link_to 'Edit', edit_item_path(item) %></td>
-    <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
+        <% @items.each do |item| %>
+          <tr>
+            <td><%= item.name %></td>
+            <td><%= item.description %></td>
+            <td><%= item.date_due %></td>
+            <td><%= item.date_remind %></td>
+            <td><%= item.complete %></td>
+            <td><%= item.star %></td>
+            <td><%= link_to 'Show', item %></td>
+            <td><%= link_to 'Edit', edit_item_path(item) %></td>
+            <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+        </table>
 
-<br />
+        <br />
 
-<%= link_to 'New Item', new_item_path %>
+        <%= link_to 'New Item', new_item_path %>
+    </div>
+  </div>
+</div>

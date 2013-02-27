@@ -8,6 +8,7 @@ class ItemsController < ApplicationController
   end
 
   def new
+    @params = params
     @item = Item.new
   end
 
@@ -19,7 +20,8 @@ class ItemsController < ApplicationController
     @item = Item.new(params[:item])
 
     if @item.save
-      redirect_to items_url(@item, only_path: true), notice: 'Item was successfully created.'
+      # redirect_to items_url(@item, only_path: true), notice: 'Item was successfully created.'
+      redirect_to :back, notice: 'Item was successfully created.'
     else
       render :new
     end

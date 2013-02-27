@@ -1,6 +1,43 @@
-<h1>Editing list</h1>
+<p id="notice"><%= notice %></p>
 
-<%= render 'form' %>
+<div class="container">
+  <div class="row">
+    <div class="span4">
+			<table>
+			<% @lists.each do |list| %>
+				<% if list.id == @list.id%>
+				  <%= form_for(@list) do |f| %>
+				    <tr>
+				      <td><%= f.text_field :title %></td>
+				      <td><%= f.submit %></td>
+				    </tr>
+				  <% end %>
+				<% else %>
+				  <%= render 'list_row', list: list %>
+				<% end %>
+			<% end %>
+			</table>
+    </div>
+    <div class="span8">
+      <table>
+      <% @items.each do |item| %>
+        <tr>
+          <td><%= item.name %></td>
+          <td><%= item.description %></td>
+          <td><%= item.date_due %></td>
+          <td><%= item.date_remind %></td>
+          <td><%= item.complete %></td>
+          <td><%= item.star %></td>
+          <td><%= link_to 'Show', item %></td>
+          <td><%= link_to 'Edit', edit_item_path(item) %></td>
+          <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+      </table>
 
-<%= link_to 'Show', @list %> |
-<%= link_to 'Back', lists_path %>
+      <br />
+
+      <%= link_to 'New Item', new_item_path %>
+    </div>
+  </div>
+</div>

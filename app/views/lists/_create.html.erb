@@ -1,0 +1,4 @@
+<%= form_tag lists_path, method: "post" do %>
+  <%= text_field_tag :title, params[:title] %>
+  <%= submit_tag "New list" , name: nil %>
+<% end %>
