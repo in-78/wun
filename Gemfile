@@ -16,7 +16,14 @@ group :assets do
   gem 'jquery-ui-rails'
 end
 
+group :development do
+  gem 'rails-erd'
+  gem 'rails_best_practices'
+  gem 'brakeman'
+end
+
 gem 'jquery-rails'
 
 gem 'devise'
 gem 'tinymce-rails'
+

@@ -1,9 +1,9 @@
 <%= form_tag items_path, method: "post" do %>
-	<%= hidden_field_tag 'list', list_id %>
-	<%= text_field_tag :name, params[:name] %>
+	<%= hidden_field_tag :list, list_id %>
+	<%= text_field_tag :name %>
 	Deadline:
-	<%= text_field_tag :date_due, params[:date_due], class: 'calendar' %>
+	<%= text_field_tag :date_due, nil, class: 'calendar' %>
 	Star:
-	<%= check_box_tag :star, params[:star] %>
+	<%= check_box_tag :star %>
 	<%= submit_tag "New Item" , name: nil %>
 <% end %>

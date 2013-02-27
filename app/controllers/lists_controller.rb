@@ -4,21 +4,11 @@ class ListsController < ApplicationController
   end
 
   def show
-    @lists = current_user.lists.all
-
-    @list = List.find(params[:id])
-    @items = @list.items.all
-  end
-
-  def new
-    @list = List.new
+    get_lists_and_items
   end
 
   def edit
-    @lists = current_user.lists.all
-
-    @list = List.find(params[:id])
-    @items = @list.items.all
+    get_lists_and_items
   end
 
   def create
@@ -26,7 +16,7 @@ class ListsController < ApplicationController
     @list.title = params[:title]
 
     if @list.save
-      # redirect_to lists_url(@list, only_path: true), notice: 'Game was successfully created.'
+      # it doesn't work! (though brakeman recommend) redirect_to lists_url(@list, only_path: true), notice: 'Game was successfully created.'
       redirect_to @list, notice: 'Game was successfully created.'
     else
       render :new
@@ -34,7 +24,7 @@ class ListsController < ApplicationController
   end
 
   def update
-    @list = List.find(params[:id])
+    @list = List.find params[:id]
 
     if @list.update_attributes(params[:list])
       redirect_to @list, notice: 'List was successfully updated.'
@@ -44,9 +34,17 @@ class ListsController < ApplicationController
   end
 
   def destroy
-    @list = List.find(params[:id])
+    @list = List.find params[:id]
     @list.destroy
 
     redirect_to lists_url
+  end
+
+private
+  def get_lists_and_items
+    @lists = current_user.lists.all
+
+    @list = List.find params[:id]
+    @items = @list.items.all
   end
 end

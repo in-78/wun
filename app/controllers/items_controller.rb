@@ -1,30 +1,17 @@
 class ItemsController < ApplicationController
-  def index
-    @items = Item.all
-  end
-
-  def show
-    @item = Item.find(params[:id])
-  end
-
-  def new
-    @params = params
-    @item = Item.new
-  end
-
   def edit
     @lists = current_user.lists.all
-    @item = Item.find(params[:id])
-    @list = List.find(@item.list.id)
+
+    @item = Item.find params[:id]
+    @list = @item.list
     @items = @list.items.all
   end
 
   def create
-    @list = List.find(params[:list])
-    @item = @list.items.new()
-    @item.name = params[:name]
-    @item.date_due = params[:date_due]
-    @item.star = 'yes' ? true : false
+    @list = List.find params[:list]
+
+    params[:star] ||= false
+    @item = @list.items.new(name: params[:name], date_due: params[:date_due], star: params[:star])
 
     if @item.save
       redirect_to @list, notice: 'Item was successfully created.'
@@ -35,13 +22,12 @@ class ItemsController < ApplicationController
 
   def update
     @item = Item.find(params[:id])
+    @list = @item.list
 
-    respond_to do |format|
-      if @item.update_attributes(params[:item])
-        redirect_to @item, notice: 'Item was successfully updated.'
-      else
-        render :edit
-      end
+    if @item.update_attributes(params[:item])
+      redirect_to @list, notice: 'Item was successfully updated.'
+    else
+      render :edit
     end
   end
 
@@ -52,4 +38,5 @@ class ItemsController < ApplicationController
 
     redirect_to @list
   end
+
 end
