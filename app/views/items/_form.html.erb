@@ -12,30 +12,33 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_field :description %>
-  </div>
-  <div class="field">
-    <%= f.label :date_due %><br />
-    <%= f.date_select :date_due %>
-  </div>
-  <div class="field">
-    <%= f.label :date_remind %><br />
-    <%= f.date_select :date_remind %>
-  </div>
-  <div class="field">
-    <%= f.label :complete %><br />
+    Done:
     <%= f.check_box :complete %>
-  </div>
-  <div class="field">
-    <%= f.label :star %><br />
+    <%= f.text_field :name %>
+    Star:
     <%= f.check_box :star %>
   </div>
+
+  <div class="field">
+    Deadline:
+    <%= f.text_field :date_due, class: "calendar" %>
+  </div>
+
+  <div class="field">
+    Date remind:
+    <%= f.text_field :date_remind, class: "calendar" %>
+  </div>
+
+  <div class="control-group">
+    <div class="controls">
+      <%= f.text_area :description, class: "tinymce", rows: 15 %>
+    </div>
+    <%= tinymce %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
+    <%= link_to 'Destroy', @item, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <%= link_to 'Close', @list %>
   </div>
 <% end %>

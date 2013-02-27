@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <div class="container">
   <div class="row">
     <div class="span4">
@@ -9,35 +7,17 @@
 				  <%= form_for(@list) do |f| %>
 				    <tr>
 				      <td><%= f.text_field :title %></td>
-				      <td><%= f.submit %></td>
 				    </tr>
 				  <% end %>
 				<% else %>
-				  <%= render 'list_row', list: list %>
+				  <%= render 'shared/list_row', list: list %>
 				<% end %>
 			<% end %>
 			</table>
     </div>
     <div class="span8">
-      <table>
-      <% @items.each do |item| %>
-        <tr>
-          <td><%= item.name %></td>
-          <td><%= item.description %></td>
-          <td><%= item.date_due %></td>
-          <td><%= item.date_remind %></td>
-          <td><%= item.complete %></td>
-          <td><%= item.star %></td>
-          <td><%= link_to 'Show', item %></td>
-          <td><%= link_to 'Edit', edit_item_path(item) %></td>
-          <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
-      <% end %>
-      </table>
-
-      <br />
-
-      <%= link_to 'New Item', new_item_path %>
+    	<%= render 'shared/create_items', list_id: @list.id %>
+      <%= render 'shared/item_table', items: @items %>
     </div>
   </div>
 </div>

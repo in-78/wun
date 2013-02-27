@@ -13,15 +13,21 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    @lists = current_user.lists.all
     @item = Item.find(params[:id])
+    @list = List.find(@item.list.id)
+    @items = @list.items.all
   end
 
   def create
-    @item = Item.new(params[:item])
+    @list = List.find(params[:list])
+    @item = @list.items.new()
+    @item.name = params[:name]
+    @item.date_due = params[:date_due]
+    @item.star = 'yes' ? true : false
 
     if @item.save
-      # redirect_to items_url(@item, only_path: true), notice: 'Item was successfully created.'
-      redirect_to :back, notice: 'Item was successfully created.'
+      redirect_to @list, notice: 'Item was successfully created.'
     else
       render :new
     end
@@ -41,8 +47,9 @@ class ItemsController < ApplicationController
 
   def destroy
     @item = Item.find(params[:id])
+    @list = @item.list
     @item.destroy
 
-    redirect_to items_url
+    redirect_to @list
   end
 end

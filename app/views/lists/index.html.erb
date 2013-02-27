@@ -1,17 +1,9 @@
-<p id="notice"><%= notice %></p>
-
 <div class="container">
   <div class="row">
     <div class="span4">
-      <table>
-      <% @lists.each do |list| %>
-        <%= render 'list_row', list: list %>
-      <% end %>
-      </table>
-
+      <%= render 'shared/list_table', lists: @lists %>
       <br />
-
-      <%= render 'create' %>
+      <%= render 'shared/create_lists' %>
     </div>
     <div class="span8">
     </div>

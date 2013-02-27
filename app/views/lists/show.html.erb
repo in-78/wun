@@ -1,39 +1,14 @@
-<p id="notice"><%= notice %></p>
-
 <div class="container">
   <div class="row">
     <div class="span4">
-			<table>
-			<% @lists.each do |list| %>
-			  <%= render 'list_row', list: list %>
-			<% end %>
-			</table>
-
+			<%= render 'shared/list_table', lists: @lists %>
 			<br />
-
-			<%= render 'create' %>
+			<%= render 'shared/create_lists' %>
 			<%= link_to 'Destroy', @list, method: :delete, data: { confirm: 'Are you sure?' } %>
     </div>
     <div class="span8">
-      <table>
-      <% @items.each do |item| %>
-        <tr>
-          <td><%= item.name %></td>
-          <td><%= item.description %></td>
-          <td><%= item.date_due %></td>
-          <td><%= item.date_remind %></td>
-          <td><%= item.complete %></td>
-          <td><%= item.star %></td>
-          <td><%= link_to 'Show', item %></td>
-          <td><%= link_to 'Edit', edit_item_path(item) %></td>
-          <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
-      <% end %>
-      </table>
-
-      <br />
-
-      <%= link_to 'New Item', new_item_path %>
+    	<%= render 'shared/create_items', list_id: @list.id %>
+      <%= render 'shared/item_table', items: @items %>
     </div>
   </div>
 </div>
