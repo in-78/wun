@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  description: MyString
+  date_due: 2013-02-26
+  date_remind: 2013-02-26
+  complete: false
+  star: false
+  list: 
+
+two:
+  name: MyString
+  description: MyString
+  date_due: 2013-02-26
+  date_remind: 2013-02-26
+  complete: false
+  star: false
+  list: 
