@@ -1,23 +1,20 @@
-<div class="container">
-  <div class="row">
-    <div class="span4">
-			<table>
-			<% @lists.each do |list| %>
-				<% if list.id == @list.id%>
-				  <%= form_for(@list) do |f| %>
-				    <tr>
-				      <td><%= f.text_field :title %></td>
-				    </tr>
-				  <% end %>
-				<% else %>
-				  <%= render 'shared/list_row', list: list %>
-				<% end %>
-			<% end %>
-			</table>
-    </div>
-    <div class="span8">
-    	<%= render 'shared/create_items', list_id: @list.id %>
-      <%= render 'shared/item_table', items: @items %>
-    </div>
-  </div>
-</div>
+<% content_for :lists do %>
+	<table>
+	<% @lists.each do |list| %>
+		<% if list.id == @list.id%>
+		  <%= form_for(@list) do |f| %>
+		    <tr>
+		      <td><%= f.text_field :title %></td>
+		    </tr>
+		  <% end %>
+		<% else %>
+		  <%= render 'shared/list_row', list: list %>
+		<% end %>
+	<% end %>
+	</table>
+<% end %>
+
+<% content_for :items do %>
+  <%= render 'shared/create_items', list_id: @list.id %>
+  <%= render 'shared/item_table', items: @items %>
+<% end %>

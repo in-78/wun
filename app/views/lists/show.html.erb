@@ -1,14 +1,11 @@
-<div class="container">
-  <div class="row">
-    <div class="span4">
-			<%= render 'shared/list_table', lists: @lists %>
-			<br />
-			<%= render 'shared/create_lists' %>
-			<%= link_to 'Destroy', @list, method: :delete, data: { confirm: 'Are you sure?' } %>
-    </div>
-    <div class="span8">
-    	<%= render 'shared/create_items', list_id: @list.id %>
-      <%= render 'shared/item_table', items: @items %>
-    </div>
-  </div>
-</div>
+<% content_for :lists do %>
+  <%= render 'shared/list_table', lists: @lists %>
+  <br />
+  <%= render 'shared/create_lists' %>
+  <%= link_to 'Destroy', @list, method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>
+
+<% content_for :items do %>
+  <%= render 'shared/create_items', list_id: @list.id %>
+  <%= render 'shared/item_table', items: @items %>
+<% end %>
