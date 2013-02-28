@@ -1,4 +1,15 @@
 class ItemsController < ApplicationController
+
+  def index
+    @lists = current_user.lists.order_position
+    @items = Item.search do
+      fulltext params[:search]
+      with(:user_id, current_user.id)
+    end.results
+
+    render layout: 'list'
+  end
+
   def edit
     @lists = current_user.lists.order_position
 

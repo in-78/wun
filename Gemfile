@@ -20,6 +20,7 @@ group :development do
   gem 'rails-erd'
   gem 'rails_best_practices'
   gem 'brakeman'
+  gem 'sunspot_solr'
 end
 
 gem 'jquery-rails'
@@ -27,3 +28,4 @@ gem 'jquery-rails'
 gem 'devise'
 gem 'tinymce-rails'
 gem 'acts_as_list'
+gem 'sunspot_rails'

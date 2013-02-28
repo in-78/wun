@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   	:name
 
   has_many :lists, dependent: :destroy
+  has_many :items, through: :lists
 
 	validates :email, uniqueness: { case_sensitive: false },
 										presence:   true

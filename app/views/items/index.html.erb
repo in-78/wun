@@ -1,0 +1,7 @@
+<% content_for :lists do %>
+  <%= render 'shared/list_table', lists: @lists %>
+<% end %>
+
+<% content_for :items do %>
+  <%= render 'shared/item_table', items: @items %>
+<% end %>

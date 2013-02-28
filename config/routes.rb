@@ -5,7 +5,7 @@ Wun::Application.routes.draw do
   	collection { post :sort }
   end
 
-  resources :items, only: [:edit, :create, :update, :destroy] do
+  resources :items, only: [:index, :edit, :create, :update, :destroy] do
   	collection { post :sort }
   end
 
