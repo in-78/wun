@@ -124,6 +124,8 @@ GEM
       activesupport (>= 3.0)
       choice (~> 0.1.6)
       ruby-graphviz (~> 1.0.4)
+    rails3-jquery-autocomplete (1.0.11)
+      rails (~> 3.0)
     rails_best_practices (1.13.4)
       activesupport
       awesome_print
@@ -204,6 +206,7 @@ DEPENDENCIES
   mysql2
   rails (= 3.2.12)
   rails-erd
+  rails3-jquery-autocomplete
   rails_best_practices
   sass-rails (~> 3.2.3)
   sunspot_rails

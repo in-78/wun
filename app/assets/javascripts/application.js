@@ -16,4 +16,5 @@
 //= require jquery.ui.datepicker
 //= require tinymce
 //= require twitter/bootstrap
+//= require autocomplete-rails
 //= require_tree .

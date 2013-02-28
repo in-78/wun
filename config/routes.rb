@@ -6,7 +6,10 @@ Wun::Application.routes.draw do
   end
 
   resources :items, only: [:index, :edit, :create, :update, :destroy] do
-  	collection { post :sort }
+  	collection do
+  		post :sort
+  		get :autocomplete_item_name
+  	end
   end
 
   get "pages/home"

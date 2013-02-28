@@ -1,4 +1,9 @@
 class ItemsController < ApplicationController
+  autocomplete :item, :name
+
+  def get_autocomplete_items(params)
+    super(params).by_user current_user
+  end
 
   def index
     @lists = current_user.lists.order_position

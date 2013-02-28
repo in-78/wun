@@ -1,6 +1,6 @@
 <%= form_tag items_path, method: :get do %>
   <p>
-    <%= text_field_tag :search, params[:search] %>
+    <%= autocomplete_field_tag :search, params[:search], autocomplete_item_name_items_path %>
     <%= submit_tag "Search", name: nil %>
   </p>
 <% end %>

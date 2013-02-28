@@ -13,6 +13,7 @@ class Item < ActiveRecord::Base
   	:star
 
   scope :order_position, order(:position)
+  scope :by_user, ->(user) { where(list_id: user.lists) }
 
 	validates :name, uniqueness: { case_sensitive: false },
 									 presence:   true
