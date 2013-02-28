@@ -3,7 +3,7 @@
   <div class="field">
     Done:
     <%= f.check_box :complete %>
-    <%= f.text_field :name, maxlength: 255 %>
+    <%= f.text_field :name, maxlength: 255, disabled: item.complete %>
     Star:
     <%= f.check_box :star, disabled: item.complete %>
   </div>

@@ -1,7 +1,9 @@
 Wun::Application.routes.draw do
   devise_for :users
 
-  resources :lists, except: [:new]
+  resources :lists, except: [:new] do
+  	collection { post :sort }
+  end
   resources :items, only: [:edit, :create, :update, :destroy]
 
   get "pages/home"

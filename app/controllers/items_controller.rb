@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   def edit
-    @lists = current_user.lists.all
+    @lists = current_user.lists.order_position
 
     @item = Item.find params[:id]
     @list = @item.list

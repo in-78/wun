@@ -2,7 +2,7 @@ class ListsController < ApplicationController
   layout "list"
 
   def index
-    @lists = current_user.lists.all
+    @lists = current_user.lists.order_position
   end
 
   def show
@@ -42,9 +42,16 @@ class ListsController < ApplicationController
     redirect_to lists_url
   end
 
+  def sort
+    params[:list].each_with_index do |id, index|
+      List.update_all({position: index+1}, {id: id})
+    end
+    render nothing: true
+  end
+
 private
   def get_lists_and_items
-    @lists = current_user.lists.all
+    @lists = current_user.lists.order_position
 
     @list = List.find params[:id]
     @items = @list.items.all

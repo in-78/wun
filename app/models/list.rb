@@ -1,9 +1,12 @@
 class List < ActiveRecord::Base
-  belongs_to :user
+	acts_as_list
 
+  belongs_to :user
   has_many :items
 
   attr_accessible :title
+
+	scope :order_position, order(:position)
 
   validates :title, presence: true
 

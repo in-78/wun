@@ -26,4 +26,4 @@ gem 'jquery-rails'
 
 gem 'devise'
 gem 'tinymce-rails'
-
+gem 'acts_as_list'
