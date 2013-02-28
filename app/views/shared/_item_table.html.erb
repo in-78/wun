@@ -1,10 +1,10 @@
-<table>
+<table id="items" data-update-url="<%= sort_items_url %>">
 <% items.each do |item| %>
-  <tr>
+	<%= content_tag_for :tr, item do %>
     <td><%= item.complete ? 'Done' : 'Todo' %></td>
     <td><%= link_to item.name, edit_item_path(item) %></td>
     <td><%= item.date_due %></td>
     <td><%= 'Star' if item.star %></td>
-  </tr>
+  <% end %>
 <% end %>
 </table>

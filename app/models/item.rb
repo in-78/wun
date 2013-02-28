@@ -1,4 +1,6 @@
 class Item < ActiveRecord::Base
+  acts_as_list scope: :list
+
   belongs_to :list
 
   attr_accessible \
@@ -8,6 +10,8 @@ class Item < ActiveRecord::Base
   	:description,
   	:name,
   	:star
+
+  scope :order_position, order(:position)
 
 	validates :name, uniqueness: { case_sensitive: false },
 									 presence:   true

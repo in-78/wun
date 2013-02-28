@@ -54,6 +54,6 @@ private
     @lists = current_user.lists.order_position
 
     @list = List.find params[:id]
-    @items = @list.items.all
+    @items = @list.items.order_position
   end
 end

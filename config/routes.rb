@@ -4,7 +4,10 @@ Wun::Application.routes.draw do
   resources :lists, except: [:new] do
   	collection { post :sort }
   end
-  resources :items, only: [:edit, :create, :update, :destroy]
+
+  resources :items, only: [:edit, :create, :update, :destroy] do
+  	collection { post :sort }
+  end
 
   get "pages/home"
   root :to => 'pages#home'

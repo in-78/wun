@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
 
     @item = Item.find params[:id]
     @list = @item.list
-    @items = @list.items.all
+    @items = @list.items.order_position
   end
 
   def create
@@ -34,5 +34,12 @@ class ItemsController < ApplicationController
     @item.destroy
 
     redirect_to @list
+  end
+
+  def sort
+    params[:item].each_with_index do |id, index|
+      Item.update_all({position: index+1}, {id: id})
+    end
+    render nothing: true
   end
 end
