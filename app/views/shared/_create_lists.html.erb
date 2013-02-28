@@ -1,3 +1,3 @@
 <%= form_tag lists_path, method: "post" do %>
-  <%= text_field_tag :title, params[:title] %>
+  <%= text_field_tag :title, params[:title], maxlength: 255 %>
 <% end %>

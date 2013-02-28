@@ -10,4 +10,9 @@ class User < ActiveRecord::Base
   	:name
 
   has_many :lists, dependent: :destroy
+
+	validates :email, uniqueness: { case_sensitive: false },
+										presence:   true
+  validates :password, presence: true,
+  										 length:   { within: 6..30 }
 end

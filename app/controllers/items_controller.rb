@@ -13,11 +13,8 @@ class ItemsController < ApplicationController
     params[:star] ||= false
     @item = @list.items.new(name: params[:name], date_due: params[:date_due], star: params[:star])
 
-    if @item.save
-      redirect_to @list, notice: 'Item was successfully created.'
-    else
-      render :new
-    end
+    notice = @item.save ? 'Item was successfully created.' : ''
+    redirect_to @list, notice: notice
   end
 
   def update
@@ -27,7 +24,7 @@ class ItemsController < ApplicationController
     if @item.update_attributes(params[:item])
       redirect_to @list, notice: 'Item was successfully updated.'
     else
-      render :edit
+      redirect_to edit_item_path
     end
   end
 
@@ -38,5 +35,4 @@ class ItemsController < ApplicationController
 
     redirect_to @list
   end
-
 end

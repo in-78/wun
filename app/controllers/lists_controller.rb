@@ -18,10 +18,10 @@ class ListsController < ApplicationController
     @list.title = params[:title]
 
     if @list.save
-      # it doesn't work! (though brakeman recommend) redirect_to lists_url(@list, only_path: true), notice: 'Game was successfully created.'
-      redirect_to @list, notice: 'Game was successfully created.'
+      # it doesn't work! (though brakeman recommend) redirect_to lists_url(@list, only_path: true), notice: 'List was successfully created.'
+      redirect_to @list, notice: 'List was successfully created.'
     else
-      render :new
+      redirect_to lists_url
     end
   end
 

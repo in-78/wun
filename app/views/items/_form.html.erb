@@ -1,40 +1,34 @@
 <%= form_for(item) do |f| %>
-  <% if item.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(item.errors.count, "error") %> prohibited this item from being saved:</h2>
-
-      <ul>
-      <% item.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
 
   <div class="field">
     Done:
     <%= f.check_box :complete %>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, maxlength: 255 %>
     Star:
-    <%= f.check_box :star %>
+    <%= f.check_box :star, disabled: item.complete %>
   </div>
 
   <div class="field">
     Deadline:
-    <%= f.text_field :date_due, class: "calendar" %>
+    <%= f.text_field :date_due, class: "calendar", disabled: item.complete, maxlength: 10 %>
   </div>
 
   <div class="field">
     Date remind:
-    <%= f.text_field :date_remind, class: "calendar" %>
+    <%= f.text_field :date_remind, class: "calendar", disabled: item.complete, maxlength: 10 %>
   </div>
 
-  <div class="control-group">
-    <div class="controls">
-      <%= f.text_area :description, class: "tinymce", rows: 15 %>
+  <% if item.complete %>
+    Description:
+    <%= item.description.html_safe %>
+  <% else %>
+    <div class="control-group">
+      <div class="controls">
+        <%= f.text_area :description, class: "tinymce", rows: 15 %>
+      </div>
+      <%= tinymce %>
     </div>
-    <%= tinymce %>
-  </div>
+  <% end %>
 
   <div class="actions">
     <%= f.submit %>
