@@ -27,6 +27,7 @@ class ItemsController < LoginController
 
     params[:star] ||= false
     @item = @list.items.new(name: params[:name], date_due: params[:date_due], star: params[:star])
+    check_for_marked_list @list, @item
 
     notice = @item.save ? 'Item was successfully created.' : ''
     redirect_to @list, notice: notice
@@ -67,6 +68,13 @@ private
   def update_position position_list
     position_list.each_with_index do |id, index|
       Item.update_all({position: index+1}, {id: id})
+    end
+  end
+
+  def check_for_marked_list list, item
+    if list.is_marked?
+      item.list = current_user.lists.find_by_tag 3
+      item.star = true
     end
   end
 end

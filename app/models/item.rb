@@ -32,6 +32,6 @@ class Item < ActiveRecord::Base
   end
 
   def user_id
-    user.id
+    list.user_id if list
   end
 end
