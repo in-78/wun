@@ -2,6 +2,10 @@ class Item < ActiveRecord::Base
   acts_as_list scope: :list
   paginates_per 10
 
+  geocoded_by :address
+
+  after_validation :geocode, :if => :address_changed?
+
   belongs_to :list
   belongs_to :user
 
@@ -11,7 +15,10 @@ class Item < ActiveRecord::Base
   	:date_remind,
   	:description,
   	:name,
-  	:star
+  	:star,
+    :address,
+    :latitude,
+    :longitude
 
   scope :order_position, order(:position)
   scope :by_user, ->(user) { where(list_id: user.lists) }
