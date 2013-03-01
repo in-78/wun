@@ -1,12 +1,7 @@
-<ul>
+<div class="container">
 	<% if user_signed_in? %>
-		<h3>Start your work!</h3>
-	  <li><%= link_to "Profile", edit_user_registration_path%> </li>
-	  <li><%= link_to "Logout", destroy_user_session_path, method: :delete%> </li>
-	  <li><%= link_to "View lists", lists_path%> </li>
+		<%= link_to "Start Your Work", lists_path, class: "btn btn-large btn-info" %>
 	<% else %>
-		<h3>Welcome to Wunderlist!</h3>
-	  <li><%= link_to "Sign Up Now!", new_user_registration_path%> </li>
-	  <li><%= link_to "Login", new_user_session_path%> </li>
+		<h1>Welcome to Wunderlist!</h1>
 	<% end %>
-</ul>
+</div>

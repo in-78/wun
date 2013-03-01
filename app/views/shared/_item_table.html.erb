@@ -1,4 +1,4 @@
-<table id="items" data-update-url="<%= sort_items_url %>">
+<table id="items" data-update-url="<%= sort_items_url %>" class="table table-striped">
 <% items.each do |item| %>
 	<%= content_tag_for :tr, item do %>
     <td><%= item.complete ? 'Done' : 'Todo' %></td>

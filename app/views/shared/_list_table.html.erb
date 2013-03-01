@@ -1,4 +1,4 @@
-<table id="lists" data-update-url="<%= sort_lists_url %>">
+<table id="lists" data-update-url="<%= sort_lists_url %>" class="table table-striped">
 	<% lists.each do |list| %>
 	  <%= render 'shared/list_row', list: list %>
 	<% end %>

@@ -1,6 +1,8 @@
-<%= form_tag items_path, method: :get do %>
-  <p>
-    <%= autocomplete_field_tag :search, params[:search], autocomplete_item_name_items_path %>
-    <%= submit_tag "Search", name: nil %>
-  </p>
-<% end %>
+<div class="form-actions">
+	<%= form_tag items_path, method: :get do %>
+	  <p>
+	    <%= autocomplete_field_tag :search, params[:search], autocomplete_item_name_items_path %>
+	    <%= submit_tag "Search", name: nil, class: 'btn btn-primary' %>
+	  </p>
+	<% end %>
+</div>

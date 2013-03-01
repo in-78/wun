@@ -30,9 +30,9 @@
     </div>
   <% end %>
 
-  <div class="actions">
-    <%= f.submit %>
-    <%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %>
-    <%= link_to 'Close', list %>
+  <div class="form-actions">
+    <%= f.submit 'Update', :class => 'btn btn-primary' %>
+    <%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %>
+    <%= link_to 'Close', list, :class => 'btn' %>
   </div>
 <% end %>

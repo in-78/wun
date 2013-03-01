@@ -1,3 +1,5 @@
-<%= form_tag lists_path, method: "post" do %>
-  <%= text_field_tag :title, params[:title], maxlength: 255 %>
-<% end %>
+<div class="form-actions">
+	<%= form_tag lists_path, method: "post" do %>
+	  <%= text_field_tag :title, params[:title], maxlength: 255 %>
+	<% end %>
+</div>
