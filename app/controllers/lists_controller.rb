@@ -21,6 +21,7 @@ class ListsController < LoginController
       # it doesn't work! (though brakeman recommend) redirect_to lists_url(@list, only_path: true), notice: 'List was successfully created.'
       redirect_to @list, notice: 'List was successfully created.'
     else
+      flash[:error] = "Name is required"
       redirect_to lists_url
     end
   end
