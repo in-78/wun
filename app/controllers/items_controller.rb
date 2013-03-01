@@ -1,26 +1,26 @@
 class ItemsController < ApplicationController
   autocomplete :item, :name
 
+  before_filter :get_lists, only: [:index, :edit]
+  before_filter :find_item, only: [:edit, :update, :destroy]
+
   def get_autocomplete_items(params)
     super(params).by_user current_user
   end
 
   def index
-    @lists = current_user.lists.order_position
     @items = Item.search do
       fulltext params[:search]
       with(:user_id, current_user.id)
+      paginate page: params[:page],  per_page: 10
     end.results
 
     render layout: 'list'
   end
 
   def edit
-    @lists = current_user.lists.order_position
-
-    @item = Item.find params[:id]
     @list = @item.list
-    @items = @list.items.order_position
+    @items = @list.items.order_position.page params[:page]
   end
 
   def create
@@ -34,7 +34,6 @@ class ItemsController < ApplicationController
   end
 
   def update
-    @item = Item.find(params[:id])
     @list = @item.list
 
     if @item.update_attributes(params[:item])
@@ -45,7 +44,6 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    @item = Item.find(params[:id])
     @list = @item.list
     @item.destroy
 
@@ -53,9 +51,22 @@ class ItemsController < ApplicationController
   end
 
   def sort
-    params[:item].each_with_index do |id, index|
+    update_position params[:list]
+    render nothing: true
+  end
+
+private
+  def get_lists
+    @lists = current_user.lists.order_position
+  end
+
+  def find_item
+    @item = Item.find params[:id]
+  end
+
+  def update_position position_list
+    position_list.each_with_index do |id, index|
       Item.update_all({position: index+1}, {id: id})
     end
-    render nothing: true
   end
 end

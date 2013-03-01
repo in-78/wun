@@ -1,5 +1,6 @@
 class Item < ActiveRecord::Base
   acts_as_list scope: :list
+  paginates_per 10
 
   belongs_to :list
   belongs_to :user
@@ -14,6 +15,8 @@ class Item < ActiveRecord::Base
 
   scope :order_position, order(:position)
   scope :by_user, ->(user) { where(list_id: user.lists) }
+  scope :week, where("date_due >= :begin_date AND date_due <= :end_date", 
+        {begin_date: DateTime.now.beginning_of_week, end_date: DateTime.now.end_of_week})
 
 	validates :name, uniqueness: { case_sensitive: false },
 									 presence:   true
@@ -25,6 +28,6 @@ class Item < ActiveRecord::Base
   end
 
   def user_id
-    list.user_id
+    list.user_id if list
   end
 end

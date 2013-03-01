@@ -15,6 +15,6 @@
 <% end %>
 
 <% content_for :items do %>
-  <%= render 'shared/create_items', list_id: @list.id %>
+  <%= render 'shared/create_items', list: @list %>
   <%= render 'shared/item_table', items: @items %>
 <% end %>
