@@ -5,7 +5,7 @@
 			<%= render 'shared/list_table', lists: @lists %>
     </div>
     <div class="span4">
-      <%= render 'shared/item_table', items: @items %>
+      <%= render 'shared/item_table', items: @items, current_item: @item %>
     </div>
     <div class="span4">
     	<%= render 'form', item: @item, list: @list %>

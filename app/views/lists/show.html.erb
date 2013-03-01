@@ -3,7 +3,7 @@
   <br />
   <%= render 'shared/create_lists' %>
   <% if @list.is_usual? %>
-    <%= link_to 'Destroy', @list, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <%= link_to 'Destroy', @list, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %>
   <% end %>
 <% end %>
 

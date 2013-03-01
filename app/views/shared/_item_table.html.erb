@@ -1,10 +1,12 @@
+<% current_item ||= nil %>
 <table id="items" data-update-url="<%= sort_items_url %>" class="table table-striped">
 <% items.each do |item| %>
-	<%= content_tag_for :tr, item do %>
-		<td><%= check_box_tag "complete", 'yes', item.complete, disabled: true %></td>
+	<% class_name = (item == current_item) ? "info" : "list" %>
+	<%= content_tag_for :tr, item, :class => class_name do %>
+		<td><%= check_box_tag "complete", "yes", item.complete, disabled: true %></td>
     <td><%= link_to item.name, edit_item_path(item) %></td>
     <td><%= item.date_due %></td>
-    <td><%= 'Star' if item.star %></td>
+    <td><%= "Star" if item.star %></td>
   <% end %>
 <% end %>
 </table>

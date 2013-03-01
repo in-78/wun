@@ -1,4 +1,6 @@
-<%= content_tag_for :tr, list do %>
+<% is_current ||= false %>
+<% class_name = is_current ? "info" : "list" %>
+<%= content_tag_for :tr, list, :class => class_name do %>
   <td><%= link_to list.title, list %></td>
   <td><%= list.items_count current_user %></td>
   <td>
