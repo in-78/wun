@@ -18,7 +18,8 @@ class Item < ActiveRecord::Base
   	:star,
     :address,
     :latitude,
-    :longitude
+    :longitude,
+    :image
 
   scope :order_position, order(:position)
   scope :by_user, ->(user) { where(list_id: user.lists) }
@@ -28,6 +29,7 @@ class Item < ActiveRecord::Base
 	validates :name, uniqueness: { case_sensitive: false },
 									 presence:   true
 
+  mount_uploader :image, ImageUploader
 
   searchable do
     text :name, :description

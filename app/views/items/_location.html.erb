@@ -1,0 +1,8 @@
+<div class="field">
+  Location:
+  <%= f.text_field :address, disabled: item.complete %>
+</div>
+
+<% if item.address? %>
+  <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{item.latitude}%2C#{item.longitude}" %>
+<% end %>

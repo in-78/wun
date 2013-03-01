@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130301140849) do
+ActiveRecord::Schema.define(:version => 20130301152148) do
 
   create_table "items", :force => true do |t|
     t.string   "name",        :default => "",    :null => false
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(:version => 20130301140849) do
     t.string   "address"
     t.float    "latitude"
     t.float    "longitude"
+    t.string   "image"
   end
 
   add_index "items", ["list_id"], :name => "index_items_on_list_id"

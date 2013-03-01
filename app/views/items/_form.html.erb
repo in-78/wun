@@ -1,4 +1,4 @@
-<%= form_for(item) do |f| %>
+<%= form_for item do |f| %>
 
   <div class="field">
     Done:
@@ -18,26 +18,17 @@
     <%= f.text_field :date_remind, class: "calendar", disabled: item.complete, maxlength: 10 %>
   </div>
 
-  <% if item.complete %>
-    Description:
-    <%= item.description.html_safe %>
-  <% else %>
-    <div class="control-group">
-      <div class="controls">
-        <%= f.text_area :description, class: "tinymce", rows: 15 %>
-      </div>
-      <%= tinymce %>
-    </div>
-  <% end %>
+  <%= render 'description', item: item, f: f %>
+
+  <%= render 'location', item: item, f: f %>
 
   <div class="field">
-    Location:
-    <%= f.text_field :address, disabled: item.complete %>
+    Image:
+    <%= f.file_field :image, disabled: item.complete %>
   </div>
-
-  <% if item.address? %>
-    <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{item.latitude}%2C#{item.longitude}" %>
-  <% end %>
+  <div>
+    <%= image_tag item.image_url(:thumb) if item.image? %>
+  </div>
 
   <div class="form-actions">
     <%= f.submit 'Update', :class => 'btn btn-primary' %>
