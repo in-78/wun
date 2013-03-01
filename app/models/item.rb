@@ -27,7 +27,11 @@ class Item < ActiveRecord::Base
     integer :user_id
   end
 
+  def user
+    list.user if list
+  end
+
   def user_id
-    list.user_id if list
+    user.id
   end
 end

@@ -1,8 +1,8 @@
-class ItemsController < ApplicationController
+class ItemsController < LoginController
   autocomplete :item, :name
 
   before_filter :get_lists, only: [:index, :edit]
-  before_filter :find_item, only: [:edit, :update, :destroy]
+  before_filter :find_item_and_list, only: [:edit, :update, :destroy]
 
   def get_autocomplete_items(params)
     super(params).by_user current_user
@@ -19,7 +19,6 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    @list = @item.list
     @items = @list.items.order_position.page params[:page]
   end
 
@@ -34,8 +33,6 @@ class ItemsController < ApplicationController
   end
 
   def update
-    @list = @item.list
-
     if @item.update_attributes(params[:item])
       redirect_to @list, notice: 'Item was successfully updated.'
     else
@@ -44,7 +41,6 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    @list = @item.list
     @item.destroy
 
     redirect_to @list
@@ -60,8 +56,12 @@ private
     @lists = current_user.lists.order_position
   end
 
-  def find_item
+  def find_item_and_list
     @item = Item.find params[:id]
+    if @item.user != current_user
+      redirect_to lists_path
+    end
+    @list = @item.list
   end
 
   def update_position position_list

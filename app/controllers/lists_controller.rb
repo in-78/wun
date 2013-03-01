@@ -1,4 +1,4 @@
-class ListsController < ApplicationController
+class ListsController < LoginController
   layout "list"
 
   before_filter :get_lists_and_items, only: [:show, :edit]
@@ -45,19 +45,27 @@ class ListsController < ApplicationController
 
 private
   def get_lists_and_items
-    @lists = current_user.lists.order_position
-
     @list = List.find params[:id]
+    check_owner @list
+
+    @lists = current_user.lists.order_position
     @items = @list.items_for_show(current_user).page params[:page]
   end
 
   def find_list
     @list = List.find params[:id]
+    check_owner @list
   end
 
   def update_position position_list
     position_list.each_with_index do |id, index|
       List.update_all({position: index+1}, {id: id})
+    end
+  end
+
+  def check_owner list
+    if list.user != current_user
+      redirect_to lists_path
     end
   end
 end
