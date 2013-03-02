@@ -4,7 +4,11 @@ class ItemsController < LoginController
   before_filter :get_lists, only: [:index, :edit]
   before_filter :find_item_and_list, only: [:edit, :update, :destroy]
 
-  def get_autocomplete_items(params)
+  rescue_from ActiveRecord::RecordNotFound do
+    redirect_to lists_path
+  end
+
+  def get_autocomplete_items params
     super(params).by_user current_user
   end
 
@@ -58,10 +62,7 @@ private
   end
 
   def find_item_and_list
-    @item = Item.find params[:id]
-    if @item.user != current_user
-      redirect_to lists_path
-    end
+    @item = current_user.items.find params[:id]
     @list = @item.list
   end
 

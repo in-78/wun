@@ -4,6 +4,10 @@ class ListsController < LoginController
   before_filter :get_lists_and_items, only: [:show, :edit]
   before_filter :find_list, only: [:update, :destroy]
 
+  rescue_from ActiveRecord::RecordNotFound do
+    redirect_to lists_path
+  end
+
   def index
     @lists = current_user.lists.order_position
   end
@@ -18,7 +22,6 @@ class ListsController < LoginController
     @list = current_user.lists.new title: params[:title]
 
     if @list.save
-      # it doesn't work! (though brakeman recommend) redirect_to lists_url(@list, only_path: true), notice: 'List was successfully created.'
       redirect_to @list, notice: 'List was successfully created.'
     else
       flash[:error] = "Name is required"
@@ -27,7 +30,7 @@ class ListsController < LoginController
   end
 
   def update
-    if @list.update_attributes(params[:list])
+    if @list.update_attributes params[:list]
       redirect_to @list, notice: 'List was successfully updated.'
     else
       render :edit
@@ -45,28 +48,19 @@ class ListsController < LoginController
   end
 
 private
-  def get_lists_and_items
-    @list = List.find params[:id]
-    check_owner @list
-
-    @lists = current_user.lists.order_position
-    @items = @list.items_for_show(current_user).page params[:page]
+  def find_list
+    @list = current_user.lists.find params[:id]
   end
 
-  def find_list
-    @list = List.find params[:id]
-    check_owner @list
+  def get_lists_and_items
+    find_list
+    @lists = current_user.lists.order_position
+    @items = @list.items_for_show(current_user).page params[:page]
   end
 
   def update_position position_list
     position_list.each_with_index do |id, index|
       List.update_all({position: index+1}, {id: id})
-    end
-  end
-
-  def check_owner list
-    if list.user != current_user
-      redirect_to lists_path
     end
   end
 end

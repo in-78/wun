@@ -1,5 +1,6 @@
+<% current_list_id ||= nil %>
 <table id="lists" data-update-url="<%= sort_lists_url %>" class="table table-striped">
 	<% lists.each do |list| %>
-	  <%= render 'shared/list_row', list: list, is_current: @list.id == list.id %>
+	  <%= render 'shared/list_row', list: list, is_current: list.id == current_list_id %>
 	<% end %>
 </table>

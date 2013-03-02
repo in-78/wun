@@ -11,6 +11,7 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require fancybox
 //= require jquery-ui
 //= require jquery_ujs
 //= require jquery.ui.datepicker
@@ -18,3 +19,13 @@
 //= require twitter/bootstrap
 //= require autocomplete-rails
 //= require_tree .
+
+$(document).ready(function() {
+	$(".fancybox").fancybox({
+		'transitionIn'  : 'elastic',
+		'transitionOut' : 'elastic',
+		'speedIn'       : 400,
+		'speedOut'      : 200,
+		'overlayShow'   : false
+	});
+});

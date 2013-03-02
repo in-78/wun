@@ -1,18 +1,19 @@
 class List < ActiveRecord::Base
+
   MARKED = 1
   WEEK = 2
   INPUT = 3
 
-	acts_as_list
+  attr_accessible :title
 
   belongs_to :user
   has_many :items
 
-  attr_accessible :title
-
-	scope :order_position, order(:position)
-
   validates :title, presence: true
+
+	scope :order_position, -> { order(:position) }
+
+  acts_as_list
 
   def items_for_show current_user
     if is_marked?
@@ -34,10 +35,6 @@ class List < ActiveRecord::Base
 
   def is_week?
     self.tag == WEEK
-  end
-
-  def is_input?
-    self.tag == INPUT
   end
 
   def is_usual?

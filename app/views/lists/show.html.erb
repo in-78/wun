@@ -1,5 +1,5 @@
 <% content_for :lists do %>
-  <%= render 'shared/list_table', lists: @lists %>
+  <%= render 'shared/list_table', lists: @lists, current_list_id: @list.id %>
   <br />
   <%= render 'shared/create_lists' %>
   <% if @list.is_usual? %>

@@ -1,34 +1,33 @@
 class Item < ActiveRecord::Base
-  acts_as_list scope: :list
-  paginates_per 10
-
-  geocoded_by :address
-
-  after_validation :geocode, :if => :address_changed?
-
-  belongs_to :list
-  belongs_to :user
 
   attr_accessible \
-  	:complete,
-  	:date_due,
-  	:date_remind,
-  	:description,
-  	:name,
-  	:star,
+    :complete,
+    :date_due,
+    :date_remind,
+    :description,
+    :name,
+    :star,
     :address,
     :latitude,
     :longitude,
     :image
 
-  scope :order_position, order(:position)
+  belongs_to :list
+  belongs_to :user
+
+  validates :name, uniqueness: { case_sensitive: false },
+                   presence:   true
+
+  after_validation :geocode, :if => :address_changed?
+
+  scope :order_position, -> { order(:position) }
   scope :by_user, ->(user) { where(list_id: user.lists) }
-  scope :week, where("date_due >= :begin_date AND date_due <= :end_date", 
-        {begin_date: DateTime.now.beginning_of_week, end_date: DateTime.now.end_of_week})
+  scope :week, -> { where("date_due >= :begin_date AND date_due <= :end_date",
+        {begin_date: DateTime.now.beginning_of_week, end_date: DateTime.now.end_of_week}) }
 
-	validates :name, uniqueness: { case_sensitive: false },
-									 presence:   true
-
+  acts_as_list scope: :list
+  paginates_per 10
+  geocoded_by :address
   mount_uploader :image, ImageUploader
 
   searchable do

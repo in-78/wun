@@ -27,7 +27,7 @@
     <%= f.file_field :image, disabled: item.complete %>
   </div>
   <div>
-    <%= image_tag item.image_url(:thumb) if item.image? %>
+    <%= link_to (image_tag item.image_url(:thumb)), item.image_url, :class => "fancybox" if item.image? %>
   </div>
 
   <div class="form-actions">
