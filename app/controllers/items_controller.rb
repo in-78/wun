@@ -56,6 +56,11 @@ class ItemsController < LoginController
     render nothing: true
   end
 
+  def complete
+    update_complete_item params[:id], params[:complete]
+    render nothing: true
+  end
+
 private
   def get_lists
     @lists = current_user.lists.order_position
@@ -77,5 +82,9 @@ private
       item.list = current_user.lists.find_by_tag 3
       item.star = true
     end
+  end
+
+  def update_complete_item id, complete_str
+    Item.update_all({complete: complete_str == 'true'}, {id: id})
   end
 end

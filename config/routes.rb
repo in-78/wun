@@ -7,7 +7,7 @@ Wun::Application.routes.draw do
 
   resources :items, only: [:index, :edit, :create, :update, :destroy] do
   	collection do
-  		post :sort
+  		post :sort, :complete
   		get :autocomplete_item_name
   	end
   end
