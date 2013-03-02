@@ -49,7 +49,7 @@ class ListsController < LoginController
 
 private
   def find_list
-    @list = current_user.lists.find params[:id]
+    @list = current_user.lists.find(params[:id]).decorate
   end
 
   def get_lists_and_items

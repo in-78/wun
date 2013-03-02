@@ -2,9 +2,7 @@
   <%= render 'shared/list_table', lists: @lists, current_list_id: @list.id %>
   <br />
   <%= render 'shared/create_lists' %>
-  <% if @list.is_usual? %>
-    <%= link_to 'Destroy', @list, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %>
-  <% end %>
+  <%= @list.destroy_link %>
 <% end %>
 
 <% content_for :items do %>
