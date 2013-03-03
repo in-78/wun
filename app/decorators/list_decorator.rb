@@ -3,7 +3,7 @@ class ListDecorator < Draper::Decorator
 
   def destroy_link
     if model.is_usual?
-      h.link_to 'Destroy', model, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'
+      h.link_to 'Destroy current list', model, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'
     end
 	end
 

@@ -9,7 +9,8 @@ class List < ActiveRecord::Base
   belongs_to :user
   has_many :items
 
-  validates :title, presence: true
+  validates :title, presence: true, length: { maximum: 200 }
+  validates :user_id, presence: true
 
 	scope :order_position, -> { order(:position) }
 

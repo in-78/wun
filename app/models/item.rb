@@ -17,6 +17,7 @@ class Item < ActiveRecord::Base
 
   validates :name, uniqueness: { case_sensitive: false },
                    presence:   true
+  validates :list_id, presence: true
 
   after_validation :geocode, :if => :address_changed?
 

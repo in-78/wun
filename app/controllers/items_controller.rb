@@ -52,7 +52,7 @@ class ItemsController < LoginController
   end
 
   def sort
-    update_position params[:list]
+    update_position params[:item]
     render nothing: true
   end
 

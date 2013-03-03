@@ -37,3 +37,10 @@ gem 'mini_magick'
 gem 'carrierwave'
 gem 'fancybox-rails'
 gem 'draper'
+
+group :test, :development do
+  gem 'rspec-rails', '>= 2.12.2'
+  gem 'capybara', '>= 2.0.2'
+  gem 'database_cleaner', '>= 0.9.1'
+  gem 'factory_girl_rails', '>= 4.2.0'
+end
